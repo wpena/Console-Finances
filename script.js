@@ -148,26 +148,38 @@ for (let i = 1; i < totalMonths; i++) {
 }
 averageChange = totalAvgChange / (totalMonths - 1);
 
+let greatestIncrease = 0;
+let greatestIncreaseMonth = '';
+let greatestDecrease = 0;
+let greatestDecreaseMonth = '';
+
+// Loop through array
+for (let i = 0; i < totalMonths; i++) {
+  if (i > 0) {
+    // Compare change in profit from previous month
+    let greatestChange = finances[i][1] - finances[i - 1][1];
+
+    // Check if change is greater than current greatest increase
+    if (greatestChange > greatestIncrease) {
+      // Update greatest increase and month
+      greatestIncrease = greatestChange;
+      greatestIncreaseMonth = finances[i][0];
+
+      // Or else Check if change is less than current greatest decrease
+    } else if (greatestChange < greatestDecrease) {
+      // Update greatest decrease and month
+      greatestDecrease = greatestChange;
+      greatestDecreaseMonth = finances[i][0];
+    }
+  }
+}
+
 console.log(`
 Financial Analysis
 ------------------
 Total Months: ${totalMonths}
 Total: £${netTotal}
 Average Change: ${(averageChange).toFixed(2)}
-Greatest Increase in Profits/Losses: 
-Greatest Decrease in Profits/Losses: `);
-
-let greatestIncrease = 0;
-let greatestIncreaseMonth = '';
-let greatestDecrease = 0;
-let greatestDecreaseMonth = '';
-
-
-/*Financial Analysis 
-----------------
-Total Months: 86
-Total: $38382578
-Average Change: -2315.12
-Greatest Increase in Profits/Losses: Feb-2012 ($1926159)
-Greatest Decrease in Profits/Losses: Sep-2013 ($-2196167)*/
+Greatest Increase in Profits/Losses: ${greatestIncreaseMonth} (£${greatestIncrease})
+Greatest Decrease in Profits/Losses: ${greatestDecreaseMonth} (£${greatestDecrease})`);
 
