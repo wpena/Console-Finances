@@ -131,17 +131,29 @@ Your task is to write JavaScript code that analyzes the records to calculate eac
 
 let totalMonths = finances.length;
 let netTotal = 0;
+let totalAvgChange = 0;
+let averageChange;
+
 // Loop through second index in the array and find sum of total elements
 for (let i = 0; i < totalMonths; i++) {
   netTotal += finances[i][1];
 }
+
+// Start loop from index 1 since no change in profit in month 1
+for (let i = 1; i < totalMonths; i++) {
+  let currentMonth = finances[i][1]; // Retrieves the current month profit
+  let prevMonth = finances[i - 1][1]; // Retrieves the previous month profit
+  let changeInProfit = currentMonth - prevMonth; // Calculates the change in profit between the current month and previous month
+  totalAvgChange += changeInProfit; // Adds the change in profit to the total change
+}
+averageChange = totalAvgChange / (totalMonths - 1);
 
 console.log(`
 Financial Analysis
 ------------------
 Total Months: ${totalMonths}
 Total: £${netTotal}
-Average Change: 
+Average Change: ${(averageChange).toFixed(2)}
 Greatest Increase in Profits/Losses: 
 Greatest Decrease in Profits/Losses: `);
 
