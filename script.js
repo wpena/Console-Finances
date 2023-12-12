@@ -157,7 +157,10 @@ Average Change: ${(averageChange).toFixed(2)}
 Greatest Increase in Profits/Losses: 
 Greatest Decrease in Profits/Losses: `);
 
-
+let greatestIncrease = 0;
+let greatestIncreaseMonth = '';
+let greatestDecrease = 0;
+let greatestDecreaseMonth = '';
 
 
 /*Financial Analysis 
